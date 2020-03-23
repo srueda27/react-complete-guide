@@ -51,7 +51,7 @@ class App extends Component {
         <h1>Hi, I'm a React App</h1>
         <button
           style={styles}
-          onClick={this.toggledPersonsHandler}>Switch Name</button>
+          onClick={this.toggledPersonsHandler}>Toggled Persons</button>
 
         {
           this.state.showPersons ?
