@@ -21,13 +21,22 @@ class App extends Component {
     this.setState({ persons: persons });
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Santi', age: '28' },
-        { name: event.target.value, age: '29' }
-      ]
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     });
+
+    // const person =  Object.assign({}, this.state.persons[personIndex]);
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const personsCopy = [...this.state.persons];
+    personsCopy[personIndex] = person;
+
+    this.setState({ persons: personsCopy });
   }
 
   toggledPersonsHandler = () => {
@@ -55,7 +64,8 @@ class App extends Component {
               click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age}
-              key={person.id} />
+              key={person.id}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
       );
