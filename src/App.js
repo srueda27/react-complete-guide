@@ -9,7 +9,8 @@ class App extends Component {
       { name: 'Santi', age: '28' },
       { name: 'Checho', age: '29' }
     ],
-    anotherState: 'Another State'
+    anotherState: 'Another State',
+    showPersons: false
   };
 
   switchNameHandler = (newName) => {
@@ -30,6 +31,11 @@ class App extends Component {
     });
   }
 
+  toggledPersonsHandler = () => {
+
+  }
+
+
   render() {
     const styles = {
       backgroundColor: 'white',
@@ -44,16 +50,24 @@ class App extends Component {
         <h1>Hi, I'm a React App</h1>
         <button
           style={styles}
-          onClick={() => this.switchNameHandler('Santiago')}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          changed={this.nameChangedHandler} />
+          onClick={() => this.toggledPersonsHandler}>Switch Name</button>
 
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'JuanSe')}>My Hobbies: Eating</Person>
+        {
+          this.state.showPersons ?
+            <div>
+              <Person
+                name={this.state.persons[0].name}
+                age={this.state.persons[0].age}
+                changed={this.nameChangedHandler} />
+
+              <Person
+                name={this.state.persons[1].name}
+                age={this.state.persons[1].age}
+                click={this.switchNameHandler.bind(this, 'JuanSe')}>My Hobbies: Eating</Person>
+            </div>
+            : null
+        }
+
       </div>
     );
   }
