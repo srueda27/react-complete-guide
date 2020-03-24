@@ -35,7 +35,6 @@ class App extends Component {
 
     const personsCopy = [...this.state.persons];
     personsCopy[personIndex] = person;
-
     this.setState({ persons: personsCopy });
   }
 
@@ -47,7 +46,8 @@ class App extends Component {
 
   render() {
     const styles = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -69,11 +69,24 @@ class App extends Component {
           })}
         </div>
       );
+
+      styles.backgroundColor = 'red';
+    }
+
+    let classes = [];
+
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
     }
 
     return (
       <div className="App" >
         <h1>Hi, I'm a React App</h1>
+        <p className={classes.join(' ')}>This is working!</p>
         <button
           style={styles}
           onClick={this.toggledPersonsHandler}>Toggled Persons</button>
