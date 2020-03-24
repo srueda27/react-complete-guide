@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -46,20 +45,10 @@ class App extends Component {
 
 
   render() {
-    const styles = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
 
     let persons = null;
+
+    let btnClasses = [classes.Button];
 
     if (this.state.showPersons) {
       persons = (
@@ -76,38 +65,32 @@ class App extends Component {
         </div>
       );
 
-      styles.backgroundColor = 'red';
-      styles[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      btnClasses.push(classes.Red)
     }
 
-    let classes = [];
+    let assignedClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <StyleRoot>
-        <div className="App" >
-          <h1>Hi, I'm a React App</h1>
-          <p className={classes.join(' ')}>This is working!</p>
-          <button
-            style={styles}
-            onClick={this.toggledPersonsHandler}>Toggled Persons</button>
+      <div className={classes.App} >
+        <h1>Hi, I'm a React App</h1>
+        <p className={assignedClasses.join(' ')}>This is working!</p>
+        <button
+          className={btnClasses.join(' ')}
+          onClick={this.toggledPersonsHandler}>Toggled Persons</button>
 
-          {persons}
+        {persons}
 
-        </div>
-      </StyleRoot>
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
